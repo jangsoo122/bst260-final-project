@@ -1,0 +1,17 @@
+municipality_type,component,paid
+municipal,emergency_room,583.401124567474
+municipal,inpatient,3386.5686159169554
+municipal,medical,10817.433754325259
+municipal,other,466.0681141868512
+municipal,outpatient,4518.823339100346
+municipal,pharmacy,4893.962041522492
+municipal,physician,3105.3581833910034
+municipal,total,14049.319100346022
+state,emergency_room,612.5313275
+state,inpatient,3104.0296025000002
+state,medical,9455.1927075
+state,other,308.71936
+state,outpatient,3861.575095
+state,pharmacy,4291.05689
+state,physician,2782.066
+state,total,12914.920259999999

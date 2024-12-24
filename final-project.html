@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jang Soo Lee">
+<meta name="dcterms.date" content="2024-12-20">
+
+<title>Analyzing Healthcare Cost Disparities Between State and Municipal Members in Massachusetts: Insights from the GIC’s HPHC Access America Plan</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="final-project_files/libs/clipboard/clipboard.min.js"></script>
+<script src="final-project_files/libs/quarto-html/quarto.js"></script>
+<script src="final-project_files/libs/quarto-html/popper.min.js"></script>
+<script src="final-project_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="final-project_files/libs/quarto-html/anchor.min.js"></script>
+<link href="final-project_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="final-project_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="final-project_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="final-project_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="final-project_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Analyzing Healthcare Cost Disparities Between State and Municipal Members in Massachusetts: Insights from the GIC’s HPHC Access America Plan</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jang Soo Lee </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">December 20, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="abstract" class="level2">
+<h2 class="anchored" data-anchor-id="abstract"><strong>Abstract</strong></h2>
+<p>Healthcare affordability remains a critical challenge in the United States, with state employee health plans (SEHPs) facing escalating costs that outpace income growth. This study examines disparities in healthcare costs and utilization patterns between municipal and state members enrolled in the Harvard Pilgrim Health Care (HPHC) Access America plan, managed by the Massachusetts Group Insurance Commission (GIC). Using medical claims data from fiscal year 2024, we analyzed demographic and geographic factors, MARA risk scores, and service-specific expenditures.</p>
+<p>Municipal members exhibited significantly higher MARA component scores across all categories, suggesting greater healthcare needs and risk-adjusted costs. Total healthcare costs per member were 8.8% higher for municipal members, driven by elevated expenditures in outpatient, pharmacy, and medical services. Demographic differences revealed municipal members were older, with a higher concentration in the 50–64 and 65+ age brackets. Geographic analysis showed a disproportionate number of municipal members residing in high-cost regions like Florida, where municipal members were 28% more likely to reside compared to state members.</p>
+<p>These findings underscore the need for targeted cost-containment strategies, including refined risk adjustment models and interventions focusing on high-cost services and geographic price variations.</p>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Healthcare affordability remains a critical challenge in the United States, which spends a larger proportion of its GDP on healthcare than any other OECD nation (Blumenthal et al., 2024). Projections indicate that healthcare spending will continue to outpace GDP growth from 2023 to 2032, further exacerbating existing financial pressures (Fiore et al., 2024). While increased healthcare spending can partly be attributed to broader insurance coverage and improved access to care, this rising demand presents significant challenges. The escalating costs threaten the financial sustainability of both public and private insurance programs, risking reduced access to care and imposing a growing burden on individuals, employers, and government budgets (Kaiser Family Foundation, 2024; Emanuel et al., 2017).</p>
+<p>In this context, state employee health plans (SEHPs), some of the largest purchasers of commercial insurance in their states, illustrate how public payers are grappling with rising costs. Despite the considerable purchasing power SEHPs wield, often exceeding that of private employers, this has proven insufficient to fully mitigate rising healthcare expenditures. Healthcare affordability remains a pressing issue in Massachusetts, particularly for the Group Insurance Commission (GIC). The GIC, which oversees health insurance for state employees, municipal employees, retirees, and their dependents, is a self-insured entity managing over $4 billion annually. The Health Policy Commission found that healthcare spending in Massachusetts grew by 5.8% in 2022, significantly outpacing the growth in household incomes. This spending increase was primarily driven by higher prices, not increased utilization, reflecting a broader national issue. The challenge is particularly acute in Massachusetts due to its concentration of high-cost academic health systems (Massachusetts Health Policy Commission, 2023).</p>
+<p>Its role underscores the importance of balancing affordability with comprehensive coverage in public health policy (Chernew et al., 2004). A prevailing assumption within the GIC is that municipal employees incur higher healthcare costs than state employees, driven by adverse selection, where municipalities may opt into GIC coverage to mitigate higher healthcare risks within their populations (Rothschild &amp; Stiglitz, 1976). Such an assumption necessitates rigorous investigation to inform policy and financial strategies effectively. Among the GIC’s health plans, the Harvard Pilgrim Health Care (HPHC) Access America plan presents a particularly compelling case; municipal members have a MARA risk score of 3.18 compared to 2.54 for state members. This difference indicates that municipal members are expected to incur approximately 25% higher healthcare costs on average than state members, given their demographic and medical risk profiles. Such a disparity suggests significant variations in underlying health conditions or utilization patterns between these groups, warranting deeper investigation. While the MARA score is a proprietary product of Milliman, these risk scores estimate expected healthcare costs by incorporating demographics and medical claims data (Milliman, 2024).</p>
+<p>This study investigates the factors underpinning the observed disparities in risk scores and associated healthcare costs for members of the HPHC Access America plan. Specifically, it addresses three key questions:</p>
+<ol type="1">
+<li><p>How do healthcare costs differ between state and municipal members enrolled in the plan, and how do these variations align with MARA scores?</p></li>
+<li><p>What demographic factors, including age, gender, and geographic distribution, contribute to the observed differences?</p></li>
+<li><p>Are there disparities in healthcare utilization patterns, such as inpatient and outpatient services or prescription drug use, between the two groups?</p></li>
+</ol>
+<p>By leveraging medical claims data from fiscal year 2024, this analysis aims to disentangle the complex interplay of demographic and behavioral factors driving these differences. The findings will not only enhance the GIC’s understanding of its member population but also inform targeted interventions to optimize the affordability and sustainability of its plans (Berwick et al., 2008).</p>
+</section>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">Methods</h2>
+<section id="study-population" class="level3">
+<h3 class="anchored" data-anchor-id="study-population">Study Population</h3>
+<p>The study population comprised all members enrolled in the HPHC Access America plan during fiscal year 2024 in the GIC. Members were stratified into two groups: state employees and municipal employees. Inclusion criteria required continuous enrollment during the study period and incurred claims. Members with incomplete claims or demographic data were excluded.</p>
+</section>
+<section id="data-sources" class="level3">
+<h3 class="anchored" data-anchor-id="data-sources">Data Sources</h3>
+<p>The primary data set used in this analysis was the medical claims data managed by Milliman under contract with the Group Insurance Commission (GIC). This data set contains detailed claims data for fiscal year 2024 (July 2023–June 2024), including inpatient, outpatient, and prescription drug claims for members enrolled in the Harvard Pilgrim Health Care (HPHC) Access America plan. The data was retrieved via structured queries (SQL) and pre-processed to create a tidy data set for analysis using the <code>tidyverse</code> suite in R.</p>
+<p>Additionally, MARA (Milliman Advanced Risk Adjuster) scores were separately calculated and provided by Milliman consultants. These scores, which estimate expected healthcare costs based on demographic and medical risk factors, were reported independently to GIC staff and incorporated into the analysis.</p>
+<p>The study also utilized supplementary demographic data, including age, gender, and geographic information, from GIC records. The data wrangling process is described in the Supplementary Methods section and detailed in the wrangle.R file.</p>
+</section>
+<section id="differences-in-mara-scores" class="level3">
+<h3 class="anchored" data-anchor-id="differences-in-mara-scores">Differences in MARA Scores</h3>
+<p>To analyze differences in MARA scores between state and municipal members, a Welch’s t-test (Welch, 1947) with Bonferroni corrections (Dunn, 1961) for multiple comparisons was conducted. The analysis compared seven MARA component scores: pharmacy, medical, inpatient, outpatient, physician, emergency room, and other scores. The MARA data set was pre-processed to standardize component scores per member for comparability across categories (Milliman, 2024).</p>
+<p>The test accounted for unequal variances and sample sizes between groups. Municipal and state means, standard deviations, and sample sizes for each component were calculated using the <code>dplyr</code> and <code>purrr</code> packages from the tidyverse suite (Wickham et al., 2019). A Bonferroni correction was used to control for Type I error. Data visualization and result presentation were conducted using the <code>gt</code> package for table formatting (Iannone et al., 2021). Results were summarized in a formatted table, with significant findings highlighted according to standard significance thresholds (p &lt; 0.05, p &lt; 0.01, p &lt; 0.001).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Analysis of MARA scores</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(BSDA)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the df_mara_clean from the data file</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>df_mara_clean <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/df_mara_clean.csv"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare component scores of state vs muni</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Using Welch's t-test with Bonferroni correction</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>component_scores <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"rx_score"</span>, <span class="st">"med_score"</span>, <span class="st">"ip_score"</span>, <span class="st">"op_score"</span>, <span class="st">"phy_score"</span>, <span class="st">"er_score"</span>, <span class="st">"oth_score"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>results_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Component =</span> component_scores) <span class="sc">%&gt;%</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">Muni_Mean =</span> <span class="fu">map_dbl</span>(Component, <span class="sc">~</span>df_mara_clean[[.x]][df_mara_clean<span class="sc">$</span>Program <span class="sc">==</span> <span class="st">"Muni"</span>]),</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">State_Mean =</span> <span class="fu">map_dbl</span>(Component, <span class="sc">~</span>df_mara_clean[[.x]][df_mara_clean<span class="sc">$</span>Program <span class="sc">==</span> <span class="st">"State"</span>]),</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">Muni_N =</span> df_mara_clean<span class="sc">$</span>pat_count[df_mara_clean<span class="sc">$</span>Program <span class="sc">==</span> <span class="st">"Muni"</span>],</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">State_N =</span> df_mara_clean<span class="sc">$</span>pat_count[df_mara_clean<span class="sc">$</span>Program <span class="sc">==</span> <span class="st">"State"</span>],</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">Muni_SD =</span> Muni_Mean,  <span class="co"># Conservative estimate</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">State_SD =</span> State_Mean  <span class="co"># Conservative estimate</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">Test_Result =</span> <span class="fu">list</span>(<span class="fu">tsum.test</span>(</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">mean.x =</span> Muni_Mean, <span class="at">s.x =</span> Muni_SD, <span class="at">n.x =</span> Muni_N,</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">mean.y =</span> State_Mean, <span class="at">s.y =</span> State_SD, <span class="at">n.y =</span> State_N,</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>      <span class="at">alternative =</span> <span class="st">"two.sided"</span>, <span class="at">var.equal =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    )),</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">T_Statistic =</span> Test_Result<span class="sc">$</span>statistic,</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">DF =</span> Test_Result<span class="sc">$</span>parameter,</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">P_Value =</span> Test_Result<span class="sc">$</span>p.value</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>Test_Result) <span class="sc">%&gt;%</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Adjusted_P_Value =</span> <span class="fu">p.adjust</span>(P_Value, <span class="at">method =</span> <span class="st">"bonferroni"</span>))</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co"># The rest of your code remains the same</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>component_names <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>  <span class="st">"rx_score"</span> <span class="ot">=</span> <span class="st">"Pharmacy Score"</span>,</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>  <span class="st">"med_score"</span> <span class="ot">=</span> <span class="st">"Medical Score"</span>,</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ip_score"</span> <span class="ot">=</span> <span class="st">"Inpatient Score"</span>,</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>  <span class="st">"op_score"</span> <span class="ot">=</span> <span class="st">"Outpatient Score"</span>,</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>  <span class="st">"phy_score"</span> <span class="ot">=</span> <span class="st">"Physician Score"</span>,</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>  <span class="st">"er_score"</span> <span class="ot">=</span> <span class="st">"Emergency Room Score"</span>,</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>  <span class="st">"oth_score"</span> <span class="ot">=</span> <span class="st">"Other Score"</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>clean_table <span class="ot">&lt;-</span> results_df <span class="sc">%&gt;%</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Component, Muni_Mean, State_Mean, Adjusted_P_Value) <span class="sc">%&gt;%</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">Component =</span> component_names[Component],</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">Muni_Mean =</span> <span class="fu">round</span>(Muni_Mean, <span class="dv">3</span>),</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">State_Mean =</span> <span class="fu">round</span>(State_Mean, <span class="dv">3</span>),</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">Significance =</span> <span class="fu">case_when</span>(</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>      Adjusted_P_Value <span class="sc">&lt;</span> <span class="fl">0.001</span> <span class="sc">~</span> <span class="st">"***"</span>,</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>      Adjusted_P_Value <span class="sc">&lt;</span> <span class="fl">0.01</span> <span class="sc">~</span> <span class="st">"**"</span>,</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>      Adjusted_P_Value <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">~</span> <span class="st">"*"</span>,</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">""</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>    <span class="at">Adjusted_P_Value =</span> <span class="fu">format.pval</span>(Adjusted_P_Value, <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Component Score"</span> <span class="ot">=</span> Component,</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Municipal Score"</span> <span class="ot">=</span> Muni_Mean,</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>    <span class="st">"State Score"</span> <span class="ot">=</span> State_Mean,</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Adjusted P-Value"</span> <span class="ot">=</span> Adjusted_P_Value</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>final_table <span class="ot">&lt;-</span> clean_table <span class="sc">%&gt;%</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Comparison of Component Scores: Municipal vs. State"</span>,</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"HPHC Access America Program"</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(<span class="st">"Municipal Score"</span>, <span class="st">"State Score"</span>),</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">3</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>  <span class="fu">text_transform</span>(</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(<span class="at">columns =</span> <span class="st">"Adjusted P-Value"</span>),</span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>    <span class="at">fn =</span> <span class="cf">function</span>(x) {</span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ifelse</span>(x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"&lt; 0.001"</span>, <span class="st">"&lt; 0.01"</span>, <span class="st">"&lt; 0.05"</span>),</span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>             <span class="fu">paste0</span>(<span class="st">"**"</span>, x, <span class="st">"**"</span>),</span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>             x)</span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_merge</span>(</span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(<span class="st">"Adjusted P-Value"</span>, <span class="st">"Significance"</span>),</span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>    <span class="at">pattern =</span> <span class="st">"{1}{2}"</span></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="fu">md</span>(<span class="st">"**Population sizes:** Municipal = 578, State = 4000"</span>)</span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="st">"P-values adjusted using Bonferroni method"</span></span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="fu">md</span>(<span class="st">"Significance levels: </span><span class="sc">\\</span><span class="st">* p &lt; 0.05, </span><span class="sc">\\</span><span class="st">*</span><span class="sc">\\</span><span class="st">* p &lt; 0.01, </span><span class="sc">\\</span><span class="st">*</span><span class="sc">\\</span><span class="st">*</span><span class="sc">\\</span><span class="st">* p &lt; 0.001"</span>)</span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">list</span>(</span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>)</span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>()</span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_options</span>(</span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>    <span class="at">table.border.top.color =</span> <span class="st">"black"</span>,</span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>    <span class="at">table.border.bottom.color =</span> <span class="st">"black"</span>,</span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a>    <span class="at">column_labels.border.bottom.color =</span> <span class="st">"black"</span>,</span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>    <span class="at">table.border.top.width =</span> <span class="fu">px</span>(<span class="dv">3</span>),</span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>    <span class="at">table.border.bottom.width =</span> <span class="fu">px</span>(<span class="dv">3</span>),</span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>    <span class="at">column_labels.border.bottom.width =</span> <span class="fu">px</span>(<span class="dv">2</span>)</span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a><span class="fu">gtsave</span>(</span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>  final_table,</span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>  <span class="at">filename =</span> <span class="st">"component_scores_comparison.png"</span>,</span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">"images"</span></span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="differences-in-healthcare-costs-by-service-category" class="level3">
+<h3 class="anchored" data-anchor-id="differences-in-healthcare-costs-by-service-category">Differences in Healthcare Costs by Service Category</h3>
+<p>The analysis compared healthcare costs per member for municipal and state employees across various service categories. Costs were divided into categories such as pharmacy, medical, inpatient, outpatient, physician, emergency room, and other services, along with a total cost category. Data were pre-processed to calculate the total cost for each category by municipality type in wrangle.R.</p>
+<p>To compare these costs, the difference and percentage difference between municipal and state members were calculated for each category. A formatted table summarizing the costs, differences, and percentage differences was created using the <code>gt</code> package. Positive differences indicated higher costs for municipal members.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>df_paid_clean <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/df_paid_clean.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the desired order of categories and their display names</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>category_order <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"pharmacy"</span>, <span class="st">"medical"</span>, <span class="st">"inpatient"</span>, <span class="st">"outpatient"</span>, <span class="st">"physician"</span>, <span class="st">"emergency_room"</span>, <span class="st">"other"</span>, <span class="st">"total"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>category_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Pharmacy"</span>, <span class="st">"Medical"</span>, <span class="st">"Inpatient"</span>, <span class="st">"Outpatient"</span>, <span class="st">"Physician"</span>, <span class="st">"Emergency Room"</span>, <span class="st">"Other"</span>, <span class="st">"Total"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Reshape the data for comparison and order categories</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>cost_comparison <span class="ot">&lt;-</span> df_paid_clean <span class="sc">%&gt;%</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> municipality_type, <span class="at">values_from =</span> paid) <span class="sc">%&gt;%</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">difference =</span> municipal <span class="sc">-</span> state,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">percent_difference =</span> (difference <span class="sc">/</span> state) <span class="sc">*</span> <span class="dv">100</span>,  <span class="co"># This is the correct calculation</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">component =</span> <span class="fu">factor</span>(component, <span class="at">levels =</span> category_order, <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(component)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the comparison table</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>cost_comparison_table <span class="ot">&lt;-</span> cost_comparison <span class="sc">%&gt;%</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Healthcare Cost per Member Comparison by Service Category: Municipal vs State Members"</span>,</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"HPHC Access America Program"</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">component =</span> <span class="st">"Service Category"</span>,</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">municipal =</span> <span class="st">"Municipal Cost"</span>,</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">state =</span> <span class="st">"State Cost"</span>,</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">difference =</span> <span class="st">"Difference"</span>,</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">percent_difference =</span> <span class="st">"% Difference"</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(municipal, state, difference),</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">2</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(  <span class="co"># Changed from fmt_percent to fmt_number</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> percent_difference,</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">1</span>,</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">pattern =</span> <span class="st">"{x}%"</span>  <span class="co"># Added percentage sign</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>()</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_borders</span>(<span class="at">sides =</span> <span class="st">"bottom"</span>, <span class="at">weight =</span> <span class="fu">px</span>(<span class="dv">3</span>)),</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>()</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_options</span>(</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">table.border.top.style =</span> <span class="st">"hidden"</span>,</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">table.border.bottom.style =</span> <span class="st">"hidden"</span>,</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">column_labels.border.bottom.width =</span> <span class="dv">2</span>,</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    <span class="at">column_labels.border.bottom.color =</span> <span class="st">"black"</span>,</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>    <span class="at">table.width =</span> <span class="fu">pct</span>(<span class="dv">100</span>),</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>    <span class="at">data_row.padding =</span> <span class="fu">px</span>(<span class="dv">10</span>),</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_notes.font.size =</span> <span class="dv">10</span>,</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>    <span class="at">heading.title.font.size =</span> <span class="dv">16</span>,</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>    <span class="at">heading.subtitle.font.size =</span> <span class="dv">13</span>,</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>    <span class="at">heading.align =</span> <span class="st">"left"</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="st">"Data source: HPHC Access America paid claims data"</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_footnote</span>(</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>    <span class="at">footnote =</span> <span class="st">"Positive difference indicates higher cost for Municipal members"</span>,</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>(<span class="at">columns =</span> difference)</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_footnote</span>(</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">footnote =</span> <span class="st">"Categories ordered as specified"</span>,</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>(<span class="at">columns =</span> component)</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">text_transform</span>(</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(<span class="at">columns =</span> component),</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>    <span class="at">fn =</span> <span class="cf">function</span>(x) {</span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>      category_names[<span class="fu">match</span>(x, category_order)]</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the table as an image</span></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a><span class="fu">gtsave</span>(cost_comparison_table, <span class="at">filename =</span> <span class="st">"images/healthcare_cost_comparison_table.png"</span>, <span class="at">expand =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="demographic-differences" class="level3">
+<h3 class="anchored" data-anchor-id="demographic-differences">Demographic Differences</h3>
+<section id="age-and-gender" class="level4">
+<h4 class="anchored" data-anchor-id="age-and-gender">Age and Gender</h4>
+<section id="difference-in-age-by-gender" class="level5">
+<h5 class="anchored" data-anchor-id="difference-in-age-by-gender">Difference in Age by Gender</h5>
+<p>A t-test was performed to compare mean ages between state and municipal members within each gender category. The analysis used cleaned demographic data that included age, gender, and municipality type. Mean ages were calculated separately for state and municipal members, and the t-test was used to assess whether differences in mean ages were statistically significant. Results, including p-values and significance levels, were summarized in a formatted table and visualized using the <code>gt</code> package in R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(webshot2)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the df_demo_clean from the data file</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>df_demo_clean <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/df_demo_clean.csv"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform t-tests</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>t_test_results <span class="ot">&lt;-</span> df_demo_clean <span class="sc">%&gt;%</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_test =</span> <span class="fu">list</span>(<span class="fu">t.test</span>(age <span class="sc">~</span> municipality_type)),</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">t_test_tidy =</span> <span class="fu">map</span>(t_test, tidy)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(t_test_tidy) <span class="sc">%&gt;%</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(gender, p.value)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate mean age by municipality_type and gender</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>age_summary <span class="ot">&lt;-</span> df_demo_clean <span class="sc">%&gt;%</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(municipality_type, gender) <span class="sc">%&gt;%</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_age =</span> <span class="fu">mean</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> municipality_type, <span class="at">values_from =</span> mean_age) <span class="sc">%&gt;%</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(t_test_results, <span class="at">by =</span> <span class="st">"gender"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(<span class="fu">c</span>(municipal, state), <span class="sc">~</span><span class="fu">round</span>(., <span class="dv">1</span>)),</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">p.value =</span> <span class="fu">format.pval</span>(p.value, <span class="at">digits =</span> <span class="dv">3</span>),</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">significance =</span> <span class="fu">case_when</span>(</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.numeric</span>(p.value) <span class="sc">&lt;</span> <span class="fl">0.001</span> <span class="sc">~</span> <span class="st">"***"</span>,</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.numeric</span>(p.value) <span class="sc">&lt;</span> <span class="fl">0.01</span> <span class="sc">~</span> <span class="st">"**"</span>,</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.numeric</span>(p.value) <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">~</span> <span class="st">"*"</span>,</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"ns"</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>age_summary_table <span class="ot">&lt;-</span> age_summary <span class="sc">%&gt;%</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">gender =</span> <span class="st">"Gender"</span>,</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">municipal =</span> <span class="st">"Municipal"</span>,</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">state =</span> <span class="st">"State"</span>,</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">p.value =</span> <span class="st">"P-value"</span>,</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">significance =</span> <span class="st">"Significance"</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_borders</span>(</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>      <span class="at">sides =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>      <span class="at">weight =</span> <span class="fu">px</span>(<span class="dv">1</span>)</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>()</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>()</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_options</span>(</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>    <span class="at">table.border.top.color =</span> <span class="st">"white"</span>,</span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>    <span class="at">table.border.bottom.color =</span> <span class="st">"black"</span>,</span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>    <span class="at">column_labels.border.bottom.color =</span> <span class="st">"black"</span>,</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>    <span class="at">column_labels.border.bottom.width =</span> <span class="fu">px</span>(<span class="dv">2</span>),</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>    <span class="at">table.font.size =</span> <span class="dv">12</span>,</span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">data_row.padding =</span> <span class="fu">px</span>(<span class="dv">5</span>)</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Comparison of Mean Age by Municipality Type and Gender"</span></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="fu">md</span>(<span class="st">"Significance levels: * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001, ns: not significant"</span>)</span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the table as an image in the images directory</span></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a><span class="fu">gtsave</span>(age_summary_table, <span class="at">filename =</span> <span class="st">"age_summary_table.png"</span>, <span class="at">path =</span> <span class="st">"images"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="age-distribution-by-gender-and-municipality-type" class="level5">
+<h5 class="anchored" data-anchor-id="age-distribution-by-gender-and-municipality-type">Age Distribution by Gender and Municipality Type</h5>
+<p>To examine the distribution of ages across genders and municipality types, a population pyramid visualization was created. Age-specific membership counts were converted into percentages within each municipality type and stratified by gender. Negative percentages were used to represent male members, and positive percentages represented female members. The plot was created using <code>ggplot2</code>, with facets for state and municipal populations. Total population sizes were included as labels in each facet (Wickham, 2016).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>df_demo_clean <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/df_demo_clean.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate percentages for each age</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>df_summary <span class="ot">&lt;-</span> df_demo_clean <span class="sc">%&gt;%</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(municipality_type, gender, age) <span class="sc">%&gt;%</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(municipality_type) <span class="sc">%&gt;%</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percentage =</span> count <span class="sc">/</span> <span class="fu">sum</span>(count) <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">percentage =</span> <span class="fu">ifelse</span>(gender <span class="sc">==</span> <span class="st">"M"</span>, <span class="sc">-</span>percentage, percentage),</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">municipality_type =</span> <span class="fu">factor</span>(municipality_type, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"state"</span>, <span class="st">"municipal"</span>))</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate total counts for labels</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>total_counts <span class="ot">&lt;-</span> df_demo_clean <span class="sc">%&gt;%</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(municipality_type) <span class="sc">%&gt;%</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">municipality_type =</span> <span class="fu">factor</span>(municipality_type, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"state"</span>, <span class="st">"municipal"</span>)))</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_summary, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> percentage, <span class="at">fill =</span> gender)) <span class="sc">+</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> municipality_type, <span class="at">scales =</span> <span class="st">"free_x"</span>, <span class="at">labeller =</span> <span class="fu">as_labeller</span>(<span class="fu">c</span>(<span class="at">municipal =</span> <span class="st">"Municipality"</span>, <span class="at">state =</span> <span class="st">"State"</span>))) <span class="sc">+</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"M"</span> <span class="ot">=</span> <span class="st">"blue"</span>, <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"red"</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"M"</span> <span class="ot">=</span> <span class="st">"Male"</span>, <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"Female"</span>)) <span class="sc">+</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="cf">function</span>(x) <span class="fu">paste0</span>(<span class="fu">abs</span>(x), <span class="st">"%"</span>),</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fu">max</span>(<span class="fu">abs</span>(df_summary<span class="sc">$</span>percentage)), <span class="fu">max</span>(<span class="fu">abs</span>(df_summary<span class="sc">$</span>percentage))),</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">40</span>, <span class="dv">40</span>, <span class="at">by =</span> <span class="dv">20</span>)</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">10</span>), <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"lightgray"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>),</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">0</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Add total count labels to each facet</span></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_text</span>(</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> total_counts,</span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="cn">Inf</span>, <span class="at">y =</span> <span class="cn">Inf</span>, <span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"(n = %d)"</span>, total)),</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>  <span class="at">hjust =</span> <span class="fl">1.1</span>, <span class="at">vjust =</span> <span class="fl">1.5</span>, <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>  <span class="at">inherit.aes =</span> <span class="cn">FALSE</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the plot</span></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"images/enrollment_by_state_muni.png"</span>, p, <span class="at">width =</span> <span class="dv">12</span>, <span class="at">height =</span> <span class="dv">8</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="age-bracket-distribution-and-chi-square-test" class="level5">
+<h5 class="anchored" data-anchor-id="age-bracket-distribution-and-chi-square-test">Age Bracket Distribution and Chi-Square Test</h5>
+<p>Members were categorized into four age brackets (0–25, 26–49, 50–64, and 65+). The age brackets were selected to reflect meaningful groupings within the HPHC Access America plan membership. Members aged 0–25 were categorized as dependents, as they are typically covered under their parent’s insurance policies. The 65+ bracket comprises non-Medicare-eligible members, as the HPHC Access America plan is a non-Medicare insurance plan. Non-Medicare eligibility for these members is primarily due to their continued employment or specific employer-based eligibility criteria. Additionally, certain retirees may remain non-Medicare-eligible due a historical exceptions, the “continuing employment exception” applicable to some long-serving Massachusetts state employees hired before April 1, 1986, who did not contribute to Medicare during their employment (SSA, 2024).</p>
+<p>The percentage distribution of members within each age bracket was calculated for state and municipal members. A chi-square test was performed to assess whether age bracket distributions differed significantly between the two groups (Pearson, 1900). Results of the chi-square test, including the test statistic, degrees of freedom, and p-value, were included as a source note in the summary table. The table, created using the <code>gt</code> package, displayed the percentage distribution of age brackets for state and municipal members.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Age bracket distributions</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stats)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>df_demo_clean <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/df_demo_clean.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create age brackets</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>df_demo_clean <span class="ot">&lt;-</span> df_demo_clean <span class="sc">%&gt;%</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age_bracket =</span> <span class="fu">case_when</span>(</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    age <span class="sc">&lt;=</span> <span class="dv">25</span> <span class="sc">~</span> <span class="st">"0-25"</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    age <span class="sc">&lt;=</span> <span class="dv">49</span> <span class="sc">~</span> <span class="st">"26-49"</span>,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    age <span class="sc">&lt;=</span> <span class="dv">64</span> <span class="sc">~</span> <span class="st">"50-64"</span>,</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"65+"</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate percentages for each age bracket and municipality type</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>age_distribution <span class="ot">&lt;-</span> df_demo_clean <span class="sc">%&gt;%</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(municipality_type, age_bracket) <span class="sc">%&gt;%</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(municipality_type) <span class="sc">%&gt;%</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percentage =</span> count <span class="sc">/</span> <span class="fu">sum</span>(count) <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> municipality_type, </span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> <span class="fu">c</span>(count, percentage),</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_glue =</span> <span class="st">"{municipality_type}_{.value}"</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">state_percentage =</span> <span class="fu">round</span>(state_percentage, <span class="dv">1</span>),</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">municipal_percentage =</span> <span class="fu">round</span>(municipal_percentage, <span class="dv">1</span>)</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform chi-square test</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>chi_square_data <span class="ot">&lt;-</span> df_demo_clean <span class="sc">%&gt;%</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(municipality_type, age_bracket) <span class="sc">%&gt;%</span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> municipality_type, <span class="at">values_from =</span> count)</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>chi_square_result <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(chi_square_data[, <span class="fu">c</span>(<span class="st">"state"</span>, <span class="st">"municipal"</span>)])</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the table</span></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>age_distribution_table <span class="ot">&lt;-</span> age_distribution <span class="sc">%&gt;%</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age_bracket, state_percentage, municipal_percentage) <span class="sc">%&gt;%</span></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Age Distribution Comparison: State vs Municipality"</span></span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">age_bracket =</span> <span class="st">"Age Bracket"</span>,</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">state_percentage =</span> <span class="st">"State (%)"</span>,</span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">municipal_percentage =</span> <span class="st">"Municipality (%)"</span></span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="fu">sprintf</span>(</span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Chi-square test result: χ² = %.2f, df = %d, p-value = %.4f"</span>,</span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>      chi_square_result<span class="sc">$</span>statistic,</span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>      chi_square_result<span class="sc">$</span>parameter,</span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>      chi_square_result<span class="sc">$</span>p.value</span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>()</span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(state_percentage, municipal_percentage),</span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">1</span></span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the table as an image</span></span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a><span class="fu">gtsave</span>(age_distribution_table, <span class="st">"images/age_distribution_table.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="state-of-residence" class="level4">
+<h4 class="anchored" data-anchor-id="state-of-residence">State of Residence</h4>
+<section id="distribution-of-state-membership" class="level5">
+<h5 class="anchored" data-anchor-id="distribution-of-state-membership">Distribution of State Membership</h5>
+<p>To analyze the distribution of state residency among members, the proportions of members residing in different states were calculated separately for state and municipal employees. The top 10 states with the highest proportions of members were identified for each group. Proportions were calculated by dividing the number of members residing in each state by the total membership within each municipality type. The results were summarized in a formatted table using the <code>gt</code> package. This table highlighted the states with the largest membership proportions for state and municipal groups.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>df_demo_clean <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/df_demo_clean.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate state distribution and proportions for each municipality type</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>state_prop <span class="ot">&lt;-</span> df_demo_clean <span class="sc">%&gt;%</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(municipality_type, state) <span class="sc">%&gt;%</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(municipality_type) <span class="sc">%&gt;%</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">proportion =</span> count <span class="sc">/</span> <span class="fu">sum</span>(count) <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>count) <span class="sc">%&gt;%</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> municipality_type, </span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> proportion, </span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_fill =</span> <span class="dv">0</span>,</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_prefix =</span> <span class="st">"prop_"</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">state_members =</span> prop_state,</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">municipal_members =</span> prop_municipal</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(state)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">state_members =</span> <span class="fu">replace_na</span>(state_members, <span class="dv">0</span>),</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">municipal_members =</span> <span class="fu">replace_na</span>(municipal_members, <span class="dv">0</span>)</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(<span class="at">order_by =</span> <span class="fu">pmax</span>(state_members, municipal_members), <span class="at">n =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(state, state_members, municipal_members) </span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the gt table</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>state_distribution_table <span class="ot">&lt;-</span> state_prop <span class="sc">%&gt;%</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Top 10 States by Proportion for State and Municipal Members"</span>,</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"HPHC Access America Program"</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">state =</span> <span class="st">"State"</span>,</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">state_members =</span> <span class="st">"State Members (%)"</span>,</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">municipal_members =</span> <span class="st">"Municipal Members (%)"</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(state_members, municipal_members),</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">1</span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>()</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_borders</span>(<span class="at">sides =</span> <span class="st">"bottom"</span>, <span class="at">weight =</span> <span class="fu">px</span>(<span class="dv">3</span>)),</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>()</span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_options</span>(</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>    <span class="at">table.border.top.style =</span> <span class="st">"hidden"</span>,</span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>    <span class="at">table.border.bottom.style =</span> <span class="st">"hidden"</span>,</span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>    <span class="at">column_labels.border.bottom.width =</span> <span class="dv">2</span>,</span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>    <span class="at">column_labels.border.bottom.color =</span> <span class="st">"black"</span>,</span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a>    <span class="at">table.width =</span> <span class="fu">pct</span>(<span class="dv">100</span>),</span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>    <span class="at">data_row.padding =</span> <span class="fu">px</span>(<span class="dv">10</span>),</span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_notes.font.size =</span> <span class="dv">10</span>,</span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>    <span class="at">heading.title.font.size =</span> <span class="dv">16</span>,</span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>    <span class="at">heading.subtitle.font.size =</span> <span class="dv">13</span>,</span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">heading.align =</span> <span class="st">"left"</span></span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="st">"Data source: HPHC Access America enrollment data"</span></span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the table as an image</span></span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a><span class="fu">gtsave</span>(state_distribution_table, <span class="at">filename =</span> <span class="st">"images/state_distribution_table.png"</span>, <span class="at">expand =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="florida-residency-analysis-and-odds-ratios" class="level5">
+<h5 class="anchored" data-anchor-id="florida-residency-analysis-and-odds-ratios">Florida Residency Analysis and Odds Ratios</h5>
+<p>The analysis investigated the association between Florida residency and municipality type. Florida was selected for detailed analysis as it had the highest proportion of members compared to other states. Additionally, Florida is known to be the most expensive state for the GIC in terms of relative price rates compared to the average commercial health plan market, making it a critical area of focus for cost containment strategies.</p>
+<p>The proportion of members residing in Florida was calculated separately for state and municipal members. A chi-square test was conducted to determine whether Florida residency was significantly associated with municipality type. Odds ratios (ORs) were calculated to quantify the likelihood of municipal members residing in Florida compared to state members (Fisher, 1922). ORs were computed overall and stratified by age groups (65+ and 64 and below). Confidence intervals (CIs) for the ORs were also calculated to assess the precision of the estimates. Results were summarized in a formatted table using the <code>gt</code> package, highlighting the odds ratios and confidence intervals for each group.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>df_demo_clean <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/df_demo_clean.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate proportion of those in Florida and whether they are significantly older and is associated with muni</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>florida_props <span class="ot">&lt;-</span> df_demo_clean <span class="sc">%&gt;%</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(municipality_type) <span class="sc">%&gt;%</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">florida_count =</span> <span class="fu">sum</span>(state <span class="sc">==</span> <span class="st">"FL"</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_count =</span> <span class="fu">n</span>(),</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">proportion =</span> florida_count <span class="sc">/</span> total_count</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>contingency_table <span class="ot">&lt;-</span> <span class="fu">table</span>(df_demo_clean<span class="sc">$</span>municipality_type, df_demo_clean<span class="sc">$</span>state <span class="sc">==</span> <span class="st">"FL"</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking for association between FL and Muni</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>chi_test <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(contingency_table)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(chi_test<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>) {</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  pairwise_test <span class="ot">&lt;-</span> <span class="fu">pairwise.prop.test</span>(contingency_table, <span class="at">p.adjust.method =</span> <span class="st">"bonferroni"</span>)</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate odds ratio to answer how much more likely is a muni to live in FL</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>safe_proportion <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">all</span>(<span class="fu">is.na</span>(x))) <span class="fu">return</span>(<span class="cn">NA</span>)</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>proportions <span class="ot">&lt;-</span> df_demo_clean <span class="sc">%&gt;%</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">is_florida =</span> state <span class="sc">==</span> <span class="st">"FL"</span>,</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">age_group =</span> <span class="fu">if_else</span>(age <span class="sc">&gt;=</span> <span class="dv">65</span>, <span class="st">"65+"</span>, <span class="st">"64 and below"</span>)</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(municipality_type, age_group) <span class="sc">%&gt;%</span></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">fl_proportion =</span> <span class="fu">safe_proportion</span>(is_florida),</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_count =</span> <span class="fu">n</span>(),</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">fl_count =</span> <span class="fu">sum</span>(is_florida, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>overall_proportions <span class="ot">&lt;-</span> df_demo_clean <span class="sc">%&gt;%</span></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">is_florida =</span> state <span class="sc">==</span> <span class="st">"FL"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(municipality_type) <span class="sc">%&gt;%</span></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">fl_proportion =</span> <span class="fu">safe_proportion</span>(is_florida),</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_count =</span> <span class="fu">n</span>(),</span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">fl_count =</span> <span class="fu">sum</span>(is_florida, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>calculate_or <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>  municipal <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(municipality_type <span class="sc">==</span> <span class="st">"municipal"</span>)</span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>  state <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(municipality_type <span class="sc">==</span> <span class="st">"state"</span>)</span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>  odds_ratio <span class="ot">&lt;-</span> (municipal<span class="sc">$</span>fl_count <span class="sc">/</span> (municipal<span class="sc">$</span>total_count <span class="sc">-</span> municipal<span class="sc">$</span>fl_count)) <span class="sc">/</span></span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>    (state<span class="sc">$</span>fl_count <span class="sc">/</span> (state<span class="sc">$</span>total_count <span class="sc">-</span> state<span class="sc">$</span>fl_count))</span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>  log_or <span class="ot">&lt;-</span> <span class="fu">log</span>(odds_ratio)</span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>  se_log_or <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>municipal<span class="sc">$</span>fl_count <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>(municipal<span class="sc">$</span>total_count <span class="sc">-</span> municipal<span class="sc">$</span>fl_count) <span class="sc">+</span></span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>                      <span class="dv">1</span><span class="sc">/</span>state<span class="sc">$</span>fl_count <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>(state<span class="sc">$</span>total_count <span class="sc">-</span> state<span class="sc">$</span>fl_count))</span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>  ci_lower <span class="ot">&lt;-</span> <span class="fu">exp</span>(log_or <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se_log_or)</span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>  ci_upper <span class="ot">&lt;-</span> <span class="fu">exp</span>(log_or <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se_log_or)</span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">odds_ratio =</span> odds_ratio, <span class="at">ci_lower =</span> ci_lower, <span class="at">ci_upper =</span> ci_upper)</span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a><span class="co"># ORs</span></span>
+<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a>overall_or <span class="ot">&lt;-</span> <span class="fu">calculate_or</span>(overall_proportions)</span>
+<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a>or_65_plus <span class="ot">&lt;-</span> <span class="fu">calculate_or</span>(proportions <span class="sc">%&gt;%</span> <span class="fu">filter</span>(age_group <span class="sc">==</span> <span class="st">"65+"</span>))</span>
+<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a>or_64_below <span class="ot">&lt;-</span> <span class="fu">calculate_or</span>(proportions <span class="sc">%&gt;%</span> <span class="fu">filter</span>(age_group <span class="sc">==</span> <span class="st">"64 and below"</span>))</span>
+<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a>  overall_or <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">group =</span> <span class="st">"Overall"</span>),</span>
+<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a>  or_65_plus <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">group =</span> <span class="st">"65+"</span>),</span>
+<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a>  or_64_below <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">group =</span> <span class="st">"64 and below"</span>)</span>
+<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a><span class="co"># Make Table</span></span>
+<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a>results_table <span class="ot">&lt;-</span> results <span class="sc">%&gt;%</span></span>
+<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a>    <span class="at">odds_ratio =</span> <span class="fu">round</span>(odds_ratio, <span class="dv">2</span>),</span>
+<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a>    <span class="at">ci_lower =</span> <span class="fu">round</span>(ci_lower, <span class="dv">2</span>),</span>
+<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a>    <span class="at">ci_upper =</span> <span class="fu">round</span>(ci_upper, <span class="dv">2</span>),</span>
+<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a>    <span class="at">ci_range =</span> <span class="fu">sprintf</span>(<span class="st">"%.2f-%.2f"</span>, ci_lower, ci_upper)</span>
+<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(group, odds_ratio, ci_range)</span>
+<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the table</span></span>
+<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a>fl_odds_ratio_table <span class="ot">&lt;-</span> results_table <span class="sc">%&gt;%</span></span>
+<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a>    <span class="at">group =</span> <span class="st">"Age Group"</span>,</span>
+<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a>    <span class="at">odds_ratio =</span> <span class="st">"Odds Ratio"</span>,</span>
+<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a>    <span class="at">ci_range =</span> <span class="st">"95% CI"</span></span>
+<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Odds Ratios of Florida Residency for HPHC Access America Plans: Municipal vs. State"</span>,</span>
+<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Comparison across age groups"</span></span>
+<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
+<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(odds_ratio),</span>
+<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">2</span></span>
+<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_footnote</span>(</span>
+<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a>    <span class="at">footnote =</span> <span class="st">"CI: Confidence Interval"</span>,</span>
+<span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>(<span class="at">columns =</span> ci_range)</span>
+<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_footnote</span>(</span>
+<span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a>    <span class="at">footnote =</span> <span class="st">"Odds ratios &gt; 1 indicate higher likelihood of Florida residency for municipal areas"</span>,</span>
+<span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>(<span class="at">columns =</span> odds_ratio)</span>
+<span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">list</span>(</span>
+<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>)</span>
+<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>()</span>
+<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb7-121"><a href="#cb7-121" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">list</span>(</span>
+<span id="cb7-122"><a href="#cb7-122" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_borders</span>(<span class="at">sides =</span> <span class="st">"bottom"</span>, <span class="at">weight =</span> <span class="fu">px</span>(<span class="dv">3</span>))</span>
+<span id="cb7-123"><a href="#cb7-123" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb7-124"><a href="#cb7-124" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>()</span>
+<span id="cb7-125"><a href="#cb7-125" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb7-126"><a href="#cb7-126" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_options</span>(</span>
+<span id="cb7-127"><a href="#cb7-127" aria-hidden="true" tabindex="-1"></a>    <span class="at">table.border.top.style =</span> <span class="st">"hidden"</span>,</span>
+<span id="cb7-128"><a href="#cb7-128" aria-hidden="true" tabindex="-1"></a>    <span class="at">table.border.bottom.style =</span> <span class="st">"hidden"</span>,</span>
+<span id="cb7-129"><a href="#cb7-129" aria-hidden="true" tabindex="-1"></a>    <span class="at">column_labels.border.bottom.width =</span> <span class="dv">2</span>,</span>
+<span id="cb7-130"><a href="#cb7-130" aria-hidden="true" tabindex="-1"></a>    <span class="at">column_labels.border.bottom.color =</span> <span class="st">"black"</span>,</span>
+<span id="cb7-131"><a href="#cb7-131" aria-hidden="true" tabindex="-1"></a>    <span class="at">table.width =</span> <span class="fu">pct</span>(<span class="dv">70</span>),</span>
+<span id="cb7-132"><a href="#cb7-132" aria-hidden="true" tabindex="-1"></a>    <span class="at">data_row.padding =</span> <span class="fu">px</span>(<span class="dv">10</span>),</span>
+<span id="cb7-133"><a href="#cb7-133" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_notes.font.size =</span> <span class="dv">10</span>,</span>
+<span id="cb7-134"><a href="#cb7-134" aria-hidden="true" tabindex="-1"></a>    <span class="at">heading.title.font.size =</span> <span class="dv">16</span>,</span>
+<span id="cb7-135"><a href="#cb7-135" aria-hidden="true" tabindex="-1"></a>    <span class="at">heading.subtitle.font.size =</span> <span class="dv">13</span>,</span>
+<span id="cb7-136"><a href="#cb7-136" aria-hidden="true" tabindex="-1"></a>    <span class="at">heading.align =</span> <span class="st">"left"</span></span>
+<span id="cb7-137"><a href="#cb7-137" aria-hidden="true" tabindex="-1"></a>  ) </span>
+<span id="cb7-138"><a href="#cb7-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-139"><a href="#cb7-139" aria-hidden="true" tabindex="-1"></a><span class="fu">gtsave</span>(fl_odds_ratio_table, <span class="at">filename =</span> <span class="st">"images/florida_odds_ratio_table.png"</span>, <span class="at">expand =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<section id="mara-scores" class="level3">
+<h3 class="anchored" data-anchor-id="mara-scores">MARA Scores</h3>
+<p>Municipal members exhibited significantly higher MARA component scores across all categories compared to state members. The largest differences were observed in the Medical Score (municipal: 2.643, state: 2.089, p &lt; 0.001), followed by the Inpatient Score (municipal: 0.924, state: 0.681, p &lt; 0.001). Additionally, the Pharmacy Score (municipal: 0.534, state: 0.455, p &lt; 0.01) and Outpatient Score (municipal: 0.718, state: 0.599, p &lt; 0.01) highlighted statistically significant disparities. Similarly, Emergency Room Scores and Other Scores were significantly higher for municipal members, with p-values well below 0.001 after Bonferroni correction. These consistent differences across all categories underscore a uniform trend of higher risk-adjusted healthcare costs for municipal members. These results, summarized in <strong>Table 1: Comparison of MARA Component Scores</strong>, demonstrate municipal members’ higher risk-adjusted costs in every analyzed category.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/component_scores_comparison.png" class="img-fluid figure-img"></p>
+<figcaption><strong>Table 1: Comparison of MARA Component Scores</strong></figcaption>
+</figure>
+</div>
+</section>
+<section id="healthcare-costs-by-service-category" class="level3">
+<h3 class="anchored" data-anchor-id="healthcare-costs-by-service-category">Healthcare Costs by Service Category</h3>
+<p>Healthcare costs per member varied significantly between municipal and state members. Total healthcare costs per member were higher for municipal members ($14,049.32) compared to state members ($12,914.92), reflecting an 8.8% difference. The Other Services category showed the largest relative percentage difference, with municipal members incurring 51.0% higher costs compared to state members. Costs for Pharmacy and Medical Services were also notably higher for municipal members, with differences of 14.1% and 14.4%, respectively. Conversely, costs in the Emergency Room category were slightly lower for municipal members (–4.8%), representing the only category where municipal members spent less. <strong>Table 2: Healthcare Cost per Member Comparison by Service Category</strong> provides a detailed breakdown.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/healthcare_cost_comparison_table.png" class="img-fluid figure-img"></p>
+<figcaption><strong>Table 2: Healthcare Cost per Member Comparison by Service Category</strong></figcaption>
+</figure>
+</div>
+</section>
+<section id="demographics" class="level3">
+<h3 class="anchored" data-anchor-id="demographics">Demographics</h3>
+<section id="age-and-gender-1" class="level4">
+<h4 class="anchored" data-anchor-id="age-and-gender-1">Age and Gender</h4>
+<p>The age disparity was observed across both genders, with municipal members in both categories being approximately five years older than their state counterparts. This pattern contributes to the observed differences in age distribution and highlights potential drivers of higher costs and risk scores for municipal members. Municipal members were older on average compared to state members. The mean age for municipal females was 57.8 years, significantly higher than the 52.3 years observed for state females (p &lt; 0.001). Similarly, municipal males had a mean age of 56.1 years, compared to 51.0 years for state males (p &lt; 0.001). These findings are presented in <strong>Table 3: Comparison of Mean Age by Municipality Type and Gender</strong> in the Supplementary Materials. The age distribution showed a higher concentration of municipal members in the 50–64 and 65+ age brackets, while state members had a larger proportion of younger individuals (ages 0–25). The differences were statistically significant (χ² = 32.65, df = 3, p &lt; 0.001). <strong>Figure 1: Age Distribution by Gender and Municipality Type</strong> visually highlights these differences.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/enrollment_by_state_muni.png" class="img-fluid figure-img"></p>
+<figcaption><strong>Figure 1: Age Distribution by Gender and Municipality Type</strong></figcaption>
+</figure>
+</div>
+<p>Further analysis revealed that municipal members were disproportionately represented in the 65+ age group (18.7% municipal, 12.9% state). Conversely, state members were over-represented in the 0–25 age bracket (18.8% state, 13.4% municipal). <strong>Table 4: Age Distribution Comparison</strong> provides a comprehensive summary.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/age_distribution_table.png" class="img-fluid figure-img"></p>
+<figcaption><strong>Table 4: Age Distribution Comparison</strong></figcaption>
+</figure>
+</div>
+</section>
+<section id="state-of-residence-1" class="level4">
+<h4 class="anchored" data-anchor-id="state-of-residence-1">State of Residence</h4>
+<p>Florida was the most common state of residence for both municipal and state members. However, a larger proportion of municipal members (44.5%) resided in Florida compared to state members (38.5%). Massachusetts was the second most common state, with 16.8% of municipal members and 12.6% of state members. The top 10 states are detailed in <strong>Table 5: Top 10 States by Proportion for State and Municipal Members</strong> in the Supplementary Materials. Municipal members were 28% more likely to reside in Florida compared to state members (OR = 1.28, 95% CI: 1.06–1.54). Stratification by age groups showed a slightly higher likelihood for members aged 65+ (OR = 1.49, 95% CI: 0.96–2.30), though the confidence interval included 1. Results are summarized in <strong>Table 6: Odds Ratios of Florida Residency for HPHC Access America Plans</strong>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/florida_odds_ratio_table.png" class="img-fluid figure-img"></p>
+<figcaption><strong>Table 6: Odds Ratios of Florida Residency for HPHC Access America Plans</strong></figcaption>
+</figure>
+</div>
+</section>
+</section>
+</section>
+<section id="discussion" class="level2">
+<h2 class="anchored" data-anchor-id="discussion">Discussion</h2>
+<p>This study aimed to investigate disparities in healthcare costs and utilization between state and municipal GIC members enrolled in the Harvard Pilgrim Health Care (HPHC) Access America plan. The findings support the hypothesis that municipal members exhibit higher healthcare costs and risk-adjusted scores, likely driven by demographic and geographic differences. These results have implications for the Group Insurance Commission’s (GIC) efforts to ensure equitable and cost-effective healthcare coverage.</p>
+<section id="interpretation-of-findings" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-of-findings">Interpretation of Findings</h3>
+<p>The analysis of MARA scores demonstrated significantly higher scores for municipal members across all components, particularly in medical, inpatient, and outpatient categories. These findings align with previous research indicating that populations with older demographics and higher-risk profiles typically incur greater healthcare costs (Meara et al., 2004; Chernew et al., 2004). Municipal members’ higher scores likely reflect underlying chronic conditions and higher utilization rates, as evidenced by their greater costs in physician and outpatient services.</p>
+<p>Differences in healthcare costs by service category reinforce the MARA findings. Municipal members consistently incurred higher per-member costs across most categories, with notable increases in outpatient, medical, and pharmacy expenses. The higher utilization of Other Services by municipal members suggests a potential reliance on specialized or ancillary care, warranting further investigation into service-specific drivers. These results support prior studies highlighting that adverse selection in insurance markets can result in disproportionate costs for certain groups (Cutler &amp; Zeckhauser, 1998).</p>
+<p>Age and gender differences further illuminate these cost disparities. Municipal members were, on average, older than state members, with the largest gap observed among women. Age distribution analyses revealed a higher concentration of municipal members in the 50–64 and 65+ brackets, demographic segments associated with higher healthcare utilization and costs (Medicare Payment Advisory Commission, 2023). The geographic distribution, particularly the higher likelihood of municipal members residing in Florida, may also contribute to cost differentials, as Florida is known for higher healthcare costs relative to other states (Finkelstein et al., 2009).</p>
+</section>
+<section id="implications" class="level3">
+<h3 class="anchored" data-anchor-id="implications">Implications</h3>
+<p>The observed disparities suggest that municipal members may disproportionately contribute to overall plan expenditures, potentially impacting the financial sustainability of the GIC’s pooled risk model. These findings underscore the importance of targeted cost-containment strategies, such as focusing on high-cost service categories like outpatient and pharmacy services. For instance, implementing value-based payment models or enhanced care coordination could mitigate excess spending while maintaining care quality (Berwick et al., 2008). Additionally, addressing geographic cost variations, such as higher relative prices in Florida, may provide opportunities for cost savings.</p>
+<p>The findings also raise questions about the effectiveness of risk adjustment mechanisms. While MARA scores capture demographic and clinical risk factors, they may not fully account for regional price variations or service-specific utilization patterns. This suggests a need for refining risk adjustment models to incorporate these additional dimensions, improving cost predictions and policy decisions (Newhouse, 1996).</p>
+</section>
+<section id="limitations" class="level3">
+<h3 class="anchored" data-anchor-id="limitations">Limitations</h3>
+<p>This study has several limitations. First, the analysis relied on claims data, which may not capture the full scope of healthcare utilization, particularly for uninsured services or preventive care. Second, the MARA scores, while robust, are proprietary and may lack transparency regarding their calculation methods, limiting their interpretability. Third, the geographic analysis did not control for variations in regional provider networks or care delivery models, which could influence cost patterns. Future research should address these limitations by incorporating additional data sources and conducting more granular analyses.</p>
+</section>
+<section id="future-directions" class="level3">
+<h3 class="anchored" data-anchor-id="future-directions">Future Directions</h3>
+<p>Building on these findings, future research should explore interventions to reduce disparities in healthcare costs between state and municipal members. Investigating the drivers of high outpatient and pharmacy costs, as well as the specific services contributing to the Other category, could inform targeted interventions. Additionally, longitudinal analyses examining trends in cost and utilization over time could provide insights into the effectiveness of current cost-containment measures. Finally, extending the analysis to include comparisons with other state employee health plans could contextualize these findings within broader national trends.</p>
+</section>
+<section id="conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
+<p>This study highlights significant disparities in healthcare costs, risk scores, and demographic patterns between state and municipal members enrolled in the HPHC Access America plan. The findings emphasize the need for tailored cost-containment strategies and refinements to risk adjustment mechanisms to promote equitable and sustainable healthcare coverage. Addressing these disparities will not only improve financial efficiency but also ensure that the GIC continues to provide high-quality care to its diverse member population.</p>
+</section>
+</section>
+<section id="supplementary-materials" class="level2">
+<h2 class="anchored" data-anchor-id="supplementary-materials">Supplementary Materials</h2>
+<section id="data-wrangling-process" class="level3">
+<h3 class="anchored" data-anchor-id="data-wrangling-process">Data Wrangling Process</h3>
+<p>To ensure a consistent and clean data set for analysis, data wrangling was conducted separately for three key data frames:</p>
+<ol type="1">
+<li><p><strong>Total Paid Medical Claims:</strong></p>
+<ul>
+<li>The claims data was cleaned to include only relevant columns and standardized fields such as municipality type (state or municipal). Total paid amounts were converted to numeric values, and claims were aggregated by categories like inpatient, outpatient, and pharmacy costs. Additional mappings were created to align claims with MARA components, ensuring the categorization was robust and non-overlapping where applicable.</li>
+</ul></li>
+<li><p><strong>MARA Scores:</strong></p>
+<ul>
+<li>MARA scores were filtered to include only the HPHC Access America plan for fiscal year 2024. These scores were standardized per member to allow direct comparisons across groups and categories (e.g., total score, pharmacy score, and medical score).</li>
+</ul></li>
+<li><p><strong>Demographic Data:</strong></p>
+<ul>
+<li>Demographic data was cleaned to correct inconsistencies such as unknown zip codes, invalid ages, or unspecified genders. Member data was uncounted by medical member months to reflect individual-level information, and geographic information was enriched using the <code>zipcodeR</code> package to include state-level identifiers.</li>
+</ul></li>
+</ol>
+<p>All pre-processed data sets were saved as CSV files for reproducibility and shared with the analysis team.</p>
+</section>
+<section id="additional-tables-and-figures" class="level3">
+<h3 class="anchored" data-anchor-id="additional-tables-and-figures">Additional Tables and Figures</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/age_summary_table.png" class="img-fluid figure-img"></p>
+<figcaption><strong>Table 3: Comparison of Mean Age by Municipality Type and Gender</strong></figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/state_distribution_table.png" class="img-fluid figure-img"></p>
+<figcaption><strong>Table 5: Top 10 States by Proportion for State and Municipal Members</strong></figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="bibliography" class="level2">
+<h2 class="anchored" data-anchor-id="bibliography">Bibliography</h2>
+<ol type="1">
+<li><p>Berwick, D. M., Nolan, T. W., &amp; Whittington, J. (2008). The Triple Aim: Care, health, and cost. <em>Health Affairs</em>, 27(3), 759–769. https://doi.org/10.1377/hlthaff.27.3.759</p></li>
+<li><p>Blumenthal, D., Abrams, M., &amp; Collins, S. R. (2024). <em>Mirror, mirror 2024: A portrait of the failing U.S. health system—Comparing performance in 10 nations</em>. Commonwealth Fund. <a href="https://doi.org/10.26099/ta0g-zp66" class="uri">https://doi.org/10.26099/ta0g-zp66</a></p></li>
+<li><p>Chernew, M. E., Hirth, R. A., &amp; Cutler, D. M. (2004). Increased spending on health care: How much can the United States afford? <em>Health Affairs</em>, 23(4), 15–25. https://doi.org/10.1377/hlthaff.23.4.15</p></li>
+<li><p>Congressional Budget Office (CBO). (2022, September 29). <em>Policy approaches to reduce what commercial insurers pay for hospitals’ and physicians’ services</em>. <a href="https://www.cbo.gov/publication/58541" class="uri">https://www.cbo.gov/publication/58541</a></p></li>
+<li><p>Cutler, D. M., &amp; Zeckhauser, R. J. (1998). Adverse selection in health insurance. <em>Frontiers in Health Policy Research</em>, 1, 1–31.</p></li>
+<li><p>Dunn, O. J. (1961). Multiple comparisons among means. <em>Journal of the American Statistical Association</em>, 56(293), 52–64. <a href="https://doi.org/10.1080/01621459.1961.10482090" class="uri">https://doi.org/10.1080/01621459.1961.10482090</a></p></li>
+<li><p>Emanuel, E. J., Glickman, A., &amp; Johnson, D. (2017). Measuring the burden of health care costs on US families: The affordability index. <em>JAMA</em>, 318(19), 1863–1864. <a href="https://doi.org/10.1001/jama.2017.15686" class="uri">https://doi.org/10.1001/jama.2017.15686</a></p></li>
+<li><p>Fiore, J. A., Madison, A. J., Poisal, J. A., Cuckler, G. A., Smith, S. D., Sisko, A. M., Keehan, S. P., Rennie, K. E., &amp; Gross, A. C. (2024). National health expenditure projections, 2023–32: Payer trends diverge as pandemic-related policies fade. <em>Health Affairs</em>, 43(7), 910–921. <a href="https://doi.org/10.1377/hlthaff.2024.00469" class="uri">https://doi.org/10.1377/hlthaff.2024.00469</a></p></li>
+<li><p>Fisher, R. A. (1922). On the interpretation of χ² from contingency tables, and the calculation of P. <em>Journal of the Royal Statistical Society</em>, 85(1), 87–94. <a href="https://doi.org/10.2307/2340521" class="uri">https://doi.org/10.2307/2340521</a></p></li>
+<li><p>Finkelstein, A., Gentzkow, M., &amp; Williams, H. (2009). Sources of geographic variation in health care: Evidence from patient migration. <em>Quarterly Journal of Economics</em>, 124(4), 1403–1444. https://doi.org/10.1162/qjec.2009.124.4.1403</p></li>
+<li><p>Iannone, R., Cheng, J., &amp; Schloerke, B. (2021). <em>gt: Easily Create Presentation-Ready Display Tables</em> Rpackageversion0.3.1R package version 0.3.1Rpackageversion0.3.1. Retrieved from <a href="https://cran.r-project.org/package=gt" class="uri">https://cran.r-project.org/package=gt</a></p></li>
+<li><p>Kaiser Family Foundation (KFF). (2024). <em>Health care costs and affordability</em>. Retrieved October 16, 2024, from <a href="https://www.kff.org/health-policy-101-health-care-costs-and-affordability/?entry=table-of-contents-how-has-u-s-health-care-spending-changed-over-time" class="uri">https://www.kff.org/health-policy-101-health-care-costs-and-affordability/?entry=table-of-contents-how-has-u-s-health-care-spending-changed-over-time</a></p></li>
+<li><p>Massachusetts Health Policy Commission (HPC). (2023, November 8). <em>Annual cost trends hearing</em>. Retrieved October 16, 2024, from <a href="https://masshpc.gov/meetings/annual-cost-trends-hearing/2023-cth" class="uri">https://masshpc.gov/meetings/annual-cost-trends-hearing/2023-cth</a></p></li>
+<li><p>Medicare Payment Advisory Commission (MedPAC). (2023). <em>Report to the Congress: Medicare payment policy</em>. Retrieved from https://www.medpac.gov/document/report-to-the-congress-medicare-payment-policy/</p></li>
+<li><p>Meara, E., White, C., &amp; Cutler, D. M. (2004). Trends in medical spending by age, 1963–2000. <em>Health Affairs</em>, 23(Suppl 1), W4-176. https://doi.org/10.1377/hlthaff.w4.176</p></li>
+<li><p>Milliman. (2024). <em>Milliman Advanced Risk Adjuster (MARA)</em>. Retrieved October 16, 2024, from <a href="https://us.milliman.com/en/products/mara" class="uri">https://us.milliman.com/en/products/mara</a></p></li>
+<li><p>Newhouse, J. P. (1996). Reimbursing health plans and health providers: Efficiency in production versus selection. <em>Journal of Economic Literature</em>, 34(3), 1236–1263.</p></li>
+<li><p>Pearson, K. (1900). On the criterion that a given system of deviations from the probable in the case of a correlated system of variables is such that it can be reasonably supposed to have arisen from random sampling. <em>Philosophical Magazine</em>, 50(302), 157–175. <a href="https://doi.org/10.1080/14786440009463897" class="uri">https://doi.org/10.1080/14786440009463897</a></p></li>
+<li><p>Rothschild, M., &amp; Stiglitz, J. (1976). Equilibrium in competitive insurance markets: An essay on the economics of imperfect information. <em>Quarterly Journal of Economics</em>, 90(4), 629–649. https://doi.org/10.2307/1885326</p></li>
+<li><p>Social Security Administration (SSA). (2024). State and local coverage: Section 218 agreements. Retrieved from <a href="https://www.ssa.gov/slge" class="uri">https://www.ssa.gov/slge</a></p></li>
+<li><p>Welch, B. L. (1947). The generalization of <code>Student's</code> problem when several different population variances are involved. <em>Biometrika</em>, 34(1/2), 28–35. https://doi.org/10.1093/biomet/34.1-2.28</p></li>
+<li><p>Wickham, H. (2016). ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York. https://ggplot2.tidyverse.org</p></li>
+<li><p>Wickham, H., François, R., Henry, L., &amp; Müller, K. (2019). <em>dplyr: A Grammar of Data Manipulation</em> [R package version 1.0.2]. Retrieved from https://cran.r-project.org/package=dplyr</p></li>
+</ol>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
